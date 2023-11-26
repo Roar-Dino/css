@@ -1,0 +1,90 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lago", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+
+    /* 전체 패딩으로 감싸줌 */
+    padding: 30px;
+}
+
+.header {
+    /* 아래에 하얗게 남는 것이 5% 정도임/ */
+    height: 95vh;
+    background-image: linear-gradient(
+        to right bottom,
+        hsla(111, 55%, 64%, 0.712),
+        hsla(160, 64%, 43%, 0.793)),
+    url('../img/hero.jpg');
+    /* 사이즈에 맞게 자동 조정됨 */
+    background-size: cover;
+    /* 상단이 보이게 고정(하단이 잘림) top, center, bottom */
+    background-position: top;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    /* 자식 요소의 기준점이 됨 */
+    position: relative;
+    
+}
+
+/* div */
+.logo-box{
+    /* absolute를 쓰려면 기준점이 있어야 하는데 부모의 relative를 써줌 */
+    position: absolute;
+    top:40px;
+    left:40px;
+
+
+}
+
+/* img */
+.logo{
+    height: 35px;
+    
+}
+
+.text-box{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+/* h1 */
+.heading-primary{
+    color: white;
+    text-transform: uppercase;
+}
+
+/* span1 */
+.heading-primary-main{
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+
+}
+
+/* span2 */
+.heading-primary-sub{
+    display: block;
+    font-size:20px;
+    font-weight: 700;
+    letter-spacing: 16.3px;
+}
