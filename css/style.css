@@ -1,90 +1,180 @@
-/*
-COLORS:
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
-
-* {
-    margin: 0;
-    padding: 0;
+/* testested */
+*{
+    margin:0;
+    padding:0;
     box-sizing: border-box;
 }
 
-body {
+body{
     font-family: "Lago", sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
-    color: #777;
-
-    /* 전체 패딩으로 감싸줌 */
+    color:#777;
     padding: 30px;
 }
 
-.header {
-    /* 아래에 하얗게 남는 것이 5% 정도임/ */
+.header{
     height: 95vh;
     background-image: linear-gradient(
         to right bottom,
-        hsla(111, 55%, 64%, 0.712),
-        hsla(160, 64%, 43%, 0.793)),
-    url('../img/hero.jpg');
-    /* 사이즈에 맞게 자동 조정됨 */
-    background-size: cover;
-    /* 상단이 보이게 고정(하단이 잘림) top, center, bottom */
-    background-position: top;
-    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-    /* 자식 요소의 기준점이 됨 */
-    position: relative;
-    
+        hsla(111,55%,64%,0.8),
+        hsla(160, 64%, 43%, 0.8)),
+       url('../img/hero.jpg');
+       background-size: cover;
+       background-position: top;
+       clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+       position: relative;
 }
 
-/* div */
 .logo-box{
-    /* absolute를 쓰려면 기준점이 있어야 하는데 부모의 relative를 써줌 */
+    top: 40px;
+    left: 40px;
     position: absolute;
-    top:40px;
-    left:40px;
-
-
 }
 
-/* img */
 .logo{
     height: 35px;
-    
 }
 
 .text-box{
     position: absolute;
     top: 40%;
-    left: 50%;
+    left:50%;
     transform: translate(-50%, -50%);
-
+    text-align: center;
 }
 
-/* h1 */
 .heading-primary{
     color: white;
     text-transform: uppercase;
+
+    /* 애니메이션을 마치고 약간 흔들리며 위치 이동하는 것을 숨겨주는 역할 */
+    backface-visibility: hidden;
+    margin-bottom: 60px;
 }
 
-/* span1 */
 .heading-primary-main{
     display: block;
     font-size: 60px;
     font-weight: 400;
     letter-spacing: 35px;
-
+    animation-name: moveInLeft;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    /* animation-iteration-count: 2; */
+    
 }
 
-/* span2 */
 .heading-primary-sub{
     display: block;
-    font-size:20px;
+    font-size: 20px;
     font-weight: 700;
-    letter-spacing: 16.3px;
+    letter-spacing: 17px;
+    animation-name: moveInRight;
+    animation-duration: 2s;
+    /* animation-iteration-count: 2; */
+    animation-timing-function: ease-in;
+}
+
+@keyframes moveInLeft{
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80%{
+        transform: translateX(10px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight{
+    0%{
+        opacity: 0;
+        transform: translateX(100px)
+    }
+    80%{
+        opacity: 0.5;
+        transform: translateX(-10px);
+    }
+    100%{
+        opacity: 1;
+        transform: translate(0px);
+    }
+}
+
+/* initial State(초기상태) */
+.btn:link, .btn:visited {
+    text-transform: uppercase;
+    /* 글자 및 밑줄 제거 */
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    /* 간단한 애니메이션 효과 */
+    transition: all .3s;
+    position: relative;
+}
+
+.btn:hover{
+    transform: translateY(-0.5rem);
+    /* box-shadow: [가로 거리] [세로 거리] [흐림 정도] [그림자 색]; */
+    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+}
+
+.btn:active{
+    transform: translateY(-0.2rem);
+    box-shadow: 0px 5px 10px rgba(0,0,0,.2);
+}
+
+
+.btn-white{
+    background-color: #fff;
+    color: #777;
+}
+ /* 버튼 후에 새로운 요소 추가(애니메이션을 위해)  */
+.btn::after{
+    content:'';
+    display:inline-block;
+    height:100%;
+    width:100%;
+    border-radius: 100px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:-1;
+    transition: all .4s;
+}
+
+.btn-white::after{
+    background-color: white;
+}
+
+.btn:hover::after{
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+@keyframes moveInBottom{
+    0%{
+        opacity: 0;
+        transform: translateY(30px)
+    }
+    
+    100%{
+        opacity: 1;
+        transform: translateY(0px)
+    }
+}
+
+/* 애니메이션 지속 시간(0.5초), 애니메이션 시작하기 전 대기 시간(0.75초) */
+.btn-animate{
+    animation: moveInBottom .5s ease-out .75s;
+/* 애니메이션 필 모드: 애니메이션 시작 시기에 첫번째 keyframe에 정의된 스타일 요소에 적용  */
+    animation-fill-mode: backwards;
 }
